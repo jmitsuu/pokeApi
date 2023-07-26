@@ -9,8 +9,12 @@ const props = defineProps({
 
 <template>
   <div class="border-[0.1rem] m-4 p-2 flex justify-center" >
-    <p>{{props.Name}}</p>
+    <div>
+
+        <p class="text-center">{{props.Name}}</p>
     <img :src="getImage" alt="imgPokemon" />
+
+    </div>
 
   </div>
 </template>
