@@ -7,7 +7,7 @@ import axios from "axios";
 import { useCounterStore } from "../stores/counter";
 import { MagnifyingGlassIcon } from "@heroicons/vue/24/outline";
 let pokemons = reactive(ref());
-const imgPokemon = ref("https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/home/shiny/")
+const imgPokemon = ref("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/")
 onMounted(() => {
 
 axios.get(`https://pokeapi.co/api/v2/pokemon?limit=150&offset=0`)
@@ -29,7 +29,7 @@ axios.get(`https://pokeapi.co/api/v2/pokemon?limit=150&offset=0`)
       v-for="pokemon in pokemons"
       :key="pokemon.name"
       :Name="pokemon.name"
-      :getImage="'https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/home/shiny/45.png'"
+      :getImage="imgPokemon + pokemon.url.split('/')[6]+'.png'"
       />
 
 
