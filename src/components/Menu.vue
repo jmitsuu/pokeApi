@@ -25,14 +25,14 @@ const routes = [
 ]
 </script>
 <template>
-  <section class="flex-1  h-screen   bg-cyan-900   ">
-    <header class="h-10 p-6 w-full items-center justify-end  flex  bg-gradient-to-b from-blue-300 to-slate-500 ">
+  <section class="flex-1  h-screen   bg-gradient-to-bl bg-green-950 ">
+    <header class="h-10 p-6 w-full items-center justify-end  flex  bg-black">
       <nav class="  m-2" v-for="item in routes" :key="item.title">
-        <RouterLink :to="item.route" class=" p-2 border-l-2 hover:bg-blue-300">{{ item.title }}</RouterLink>
+        <RouterLink :to="item.route" class="  text-white hover:border-b-2 p-2">{{ item.title }}</RouterLink>
       </nav>
 
     </header>
-    <div class="flex justify-center   bg-cyan-900   items-center p-2">
+    <div class="flex justify-center  bg-gradient-to-bl  from-green-950 to-black bg-opacity-90   items-center p-2">
       <RouterView  />
     </div>
   </section>
