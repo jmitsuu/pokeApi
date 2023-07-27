@@ -6,32 +6,28 @@ import axios from "axios";
 import { useCounterStore } from "../stores/counter";
 import { MagnifyingGlassIcon, XCircleIcon  } from "@heroicons/vue/24/outline";
 let pokemons = reactive(ref());
-const reloadPokemons = reactive(ref())
-const buttonSearch =ref(false)
-const inputTextName = ref()
+const reloadPokemons = reactive(ref());
+let infoPokemons = reactive(ref());
+const base = ref();
+const buttonSearch =ref(false);
+const inputTextName = ref();
+
 const imgPokemon = ref(
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/"
 );
-
-
+const baseInfoUrl = ref("https://pokeapi.co/api/v2/pokemon/")
 onMounted(() => {
-
-    axios
-    .get(`https://pokeapi.co/api/v2/pokemon?limit=150&offset=0`)
-    .then(({ data }) => {
+async function getPoke(){
+  const {data} = await axios
+    .get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`)
       pokemons.value = data.results;
-      console.log(pokemons.value);
-      reloadPokemons.value = pokemons.value
-    });
-  
-
-
-
+      reloadPokemons.value = pokemons.value;
+}getPoke()
 });
+
 function findPoke(){
   buttonSearch.value = true
   pokemons.value = [pokemons.value.find((item)=> {
-
     return item.name.includes(inputTextName.value)
   })]
 }
@@ -39,7 +35,6 @@ function callApi(){
   buttonSearch.value = false
   pokemons.value  = reloadPokemons.value;
   inputTextName.value = ''
-
 }
 
 </script>
@@ -74,7 +69,7 @@ function callApi(){
         :key="pokemon.name"
         :Name="pokemon.name"
         :getImage="imgPokemon + pokemon.url.split('/')[6] + '.png'"
-    
+        :pokeInfo="pokemon.url"
       />
   
     </div>
