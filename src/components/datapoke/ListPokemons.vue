@@ -3,6 +3,7 @@ import { toRefs, ref } from "vue";
 const props = defineProps({
   Name: String,
   getImage: String,
+  Poke:Object
 });
 const { Name } = toRefs(props);
 </script>
@@ -15,6 +16,7 @@ const { Name } = toRefs(props);
     <div>
       <p class="text-center text-gray-200 font-semibold text-2xl ">{{ Name }}</p>
       <img :src="getImage" class="h-52 hover:rotate-12" alt="imgPokemon" />
+      <a>{{Poke}}</a>
     </div>
   </div>
 </template>

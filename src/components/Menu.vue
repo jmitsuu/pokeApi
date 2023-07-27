@@ -32,10 +32,12 @@ const routes = [
       </nav>
 
     </header>
-    <div class="flex justify-center  bg-gradient-to-bl  from-green-950 to-black bg-opacity-90   items-center p-2">
-      <RouterView  />
+    <div class="flex justify-center  bg-gradient-to-bl  bg-green-950 bg-opacity-90   items-center p-2">
+      <RouterView class="h-full"  />
     </div>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
