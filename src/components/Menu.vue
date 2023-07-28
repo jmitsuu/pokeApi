@@ -18,10 +18,10 @@ const routes = [
     route: '/',
     title: 'Home'
   },
-  // {
-  //   route: '/about',
-  //   title: 'About'
-  // }
+  {
+    route: '/pokeball',
+    title: 'PokeBola'
+  }
 ]
 </script>
 <template>

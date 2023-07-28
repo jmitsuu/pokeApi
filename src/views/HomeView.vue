@@ -70,6 +70,7 @@ function callApi(){
         :Name="pokemon.name"
         :getImage="imgPokemon + pokemon.url.split('/')[6] + '.png'"
         :pokeInfo="pokemon.url"
+        :items="pokemon"
       />
   
     </div>
