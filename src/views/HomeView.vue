@@ -1,43 +1,46 @@
 <script setup>
 import { onMounted, ref, reactive, computed } from "vue";
 import ListPokemons from "../components/datapoke/ListPokemons.vue";
-import { fetchWeather } from "../http/fetch";
+import ListPokeCard from "../components/datapoke/ListPokeCard.vue";
+
 import axios from "axios";
-
-import { MagnifyingGlassIcon, XCircleIcon  } from "@heroicons/vue/24/outline";
-let pokemons = reactive(ref());
+const pokemons = reactive(ref());
 const reloadPokemons = reactive(ref());
-let infoPokemons = reactive(ref());
-const base = ref();
-const buttonSearch =ref(false);
-let inputTextName = ref();
-
+const inputTextName = ref();
+const pokemonSelected = ref();
+const pokeImgSelected = ref()
 const imgPokemon = ref(
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/"
 );
-const baseInfoUrl = ref("https://pokeapi.co/api/v2/pokemon/")
 onMounted(() => {
-async function getPoke(){
-  const {data} = await axios
-    .get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`)
-      pokemons.value = data.results;
-      reloadPokemons.value = data.results;
-}getPoke()
-
+  async function getPoke() {
+    const { data } = await axios.get(
+      `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`
+    );
+    pokemons.value = data.results;
+    reloadPokemons.value = data.results;
+  }
+  getPoke();
 });
 
-const pokemonFiltered = computed(()=>{
-if(pokemons.value && inputTextName.value){
- pokemons.value = pokemons.value.filter((item)=> {
-  return  item.name.toLowerCase().includes(inputTextName.value.toLowerCase())
-  })
-}else{
-  pokemons.value = reloadPokemons.value
-}
-return pokemons.value
-})
-
-
+const pokemonFiltered = computed(() => {
+  if (pokemons.value && inputTextName.value) {
+    pokemons.value = pokemons.value.filter((item) => {
+      return item.name
+        .toLowerCase()
+        .includes(inputTextName.value.toLowerCase());
+    });
+  } else {
+    pokemons.value = reloadPokemons.value;
+  }
+  return pokemons.value;
+});
+const selectPokemon = async (poke) => {
+  const { data } = await axios.get(poke.url);
+  pokemonSelected.value = data;
+  pokeImgSelected.value = poke.url
+  console.log(data)
+};
 </script>
 
 <template>
@@ -46,42 +49,36 @@ return pokemons.value
       <span class="shadow px-1 shadow-blue-600 rotate-45 text-blue-600">P</span
       >oke API
     </h1>
-    <div class="justify-center flex items-center ">
-    
-    </div>
+    <div class="justify-center flex items-center"></div>
 
-    <div class="float-right border-[0.8px] border-gray-300 m-1 rounded-md p-4  mt-8 w-2/6  ">
-      <span class="relative">
-        <label hidden></label>
-        <input
-          v-model="inputTextName"
-          type="text"
-          class="m-auto h-10 rounded-md mt-9 w-full p-2 outline-none border-[0.1em] border-blue-400 shadow-lg shadow-yellow-950 bg-slate-100"
-          placeholder="Pesquisar..."
+    <div class="grid grid-cols-2 m-1 rounded-md p-4 mt-8">
+      <ListPokeCard 
+      :name="pokemonSelected?.name"
+      :xp="pokemonSelected?.base_experience"
+      :height=" pokemonSelected?.height" 
+      :img=" pokeImgSelected ?  imgPokemon  + pokeImgSelected.split('/')[6] + '.png' : '' "
         />
-        <!-- <MagnifyingGlassIcon
-          v-if="!buttonSearch"
-          class="h-5 absolute right-2 bottom-1 cursor-pointer"
-          @click="findPoke"
-        /> 
-        <XCircleIcon v-if="buttonSearch" @click="callApi"  class="h-6 absolute right-2 bottom-1 cursor-pointer"/> -->
-      </span>
-  
-      <div class="grid xl:grid-cols-4 sm:grid-cols-2 md:grid-cols-4  w-2/5xl   ">
-        
-      <ListPokemons
-        v-for="pokemon in pokemonFiltered"
-        :key="pokemon.name"
-        :Name="pokemon.name"
-        :getImage="imgPokemon + pokemon.url.split('/')[6] + '.png'"
-        :pokeInfo="pokemon.url"
-        :items="pokemon"
-      />
-  
-    </div>
+      <div class="border-[0.8px] border-gray-300 m-1 rounded-md p-4 mt-8">
+        <span class="relative">
+          <label hidden></label>
+          <input
+            v-model="inputTextName"
+            type="text"
+            class="m-auto h-10 rounded-md mt-9 w-full p-2 outline-none border-[0.1em] border-blue-400 shadow-lg shadow-yellow-950 bg-slate-100"
+            placeholder="Pesquisar..."
+          />
+        </span>
 
+        <div class="flex flex-wrap overflow-y-scroll h-screen">
+          <ListPokemons
+            v-for="pokemon in pokemonFiltered"
+            :key="pokemon.name"
+            :Name="pokemon.name"
+            :getImage="imgPokemon + pokemon.url.split('/')[6] + '.png'"
+            @click="selectPokemon(pokemon)"
+          />
+        </div>
+      </div>
     </div>
-
- 
   </section>
 </template>
