@@ -11,7 +11,13 @@ module.exports = {
         'bgRain': "url('/src/assets/images/rain.png')",
         'bgMist': "url('/src/assets/images/mist.png')",
         'footer-texture': "url('/img/footer-texture.png')",
-      }
+      },
+      colors: {
+        'LightCyan': '#E0FFFF',
+        'PowderBlue': '#B0E0E6',
+        'Lavender': '#E6E6FA',
+        'Thistle':	'#D8BFD8'
+      },
     },
   },
   plugins: [],

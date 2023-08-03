@@ -13,9 +13,9 @@ const styleVshow = ref('rotate-180 transition-all ')
 <template>
 
 
-  <div class="m-24 rounded-lg h-80 bg-red-400  backdrop-hue-rotate-180  " >
+  <div class="m-24 rounded-lg h-80 bg-PowderBlue w-2/4 p-8  " >
     <img v-if="!name" src="https://img.icons8.com/?size=512&id=45507&format=png" :class="!name?  styleVshow : styleVshow = 'rotate-180 transition-all'" class="h-44 m-auto" />
-    <img v-else :src="img" class="h-44 m-auto   " />
+    <img v-else :src="img" class="h-44 m-auto  " />
     <h1 class="font-bold text-xl text-center"><span v-if="!name"> ????</span> {{ name }}</h1>
     <hr>
 

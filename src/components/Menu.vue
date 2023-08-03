@@ -32,7 +32,7 @@ const routes = [
       </nav>
 
     </header>
-    <RouterView    />
+
 
   </section>
 </template>

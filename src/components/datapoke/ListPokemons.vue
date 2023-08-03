@@ -38,11 +38,11 @@ const pokeStats = reactive(ref())
 
 <template>
   <div
-    class="border-[0.1rem] m-4 py-2 h-40  flex justify-center rounded-lg shadow-lg shadow-white bg-gradient-to-bl from-indigo-500 via-black to-yellow-500  cursor-pointer"
+    class="border-[0.1rem] m-4 py-2 h-40  flex justify-center rounded-lg shadow-lg shadow-white bg-gradient-to-bl from-Lavender via-white to-Thistle  cursor-pointer"
   >
 
-    <div class="relative w-full  ">
-      <p class="text-center text-gray-200 font-semibold text-xl  ">{{ Name }}</p>
+    <div class="relative   ">
+      <p class="text-center text-gray-900 font-semibold text-xl  ">{{ Name }}</p>
       <img :src="getImage" class="h-28 w-28 scale-95  m-auto hover:scale-100 transition duration-200" alt="imgPokemon" />
       <div class="flex justify-center" @click="getDetails">
         <!-- <div v-for="Skills in pokeDetails" :key="Skills.name"    class="px-4 mt-4 rounded-md mx-4  border-[0.2px] text-white  ">

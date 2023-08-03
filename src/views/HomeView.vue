@@ -51,7 +51,7 @@ const selectPokemon = async (poke) => {
     </h1>
     <div class="justify-center flex items-center"></div>
 
-    <div class="grid grid-cols-2 m-1 rounded-md p-4 mt-8">
+    <div class="grid grid-cols-2 m-1 rounded-md  mt-8">
       <ListPokeCard 
       :name="pokemonSelected?.name"
       :xp="pokemonSelected?.base_experience"
@@ -64,12 +64,12 @@ const selectPokemon = async (poke) => {
           <input
             v-model="inputTextName"
             type="text"
-            class="m-auto h-10 rounded-md mt-9 w-full p-2 outline-none border-[0.1em] border-blue-400 shadow-lg shadow-yellow-950 bg-slate-100"
+            class="m-auto mb-6 border-0 h-10 rounded-md mt-9  p-2 outline-none  text-xl bg-slate-100"
             placeholder="Pesquisar..."
           />
         </span>
 
-        <div class="flex flex-wrap overflow-y-scroll h-screen">
+        <div class="flex flex-wrap overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2">
           <ListPokemons
             v-for="pokemon in pokemonFiltered"
             :key="pokemon.name"
