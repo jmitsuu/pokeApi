@@ -74,7 +74,7 @@ const selectPokemon = async (poke) => {
         </span>
 
         <div
-          class="flex flex-wrap overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
+          class="flex flex-wrap items-center justify-center overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
         >
           <ListPokemons
             v-for="pokemon in pokemonFiltered"

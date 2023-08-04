@@ -15,7 +15,7 @@ const { Stats } = toRefs(pokemon);
 
 <template>
   <div
-    class="m-24 rounded-lg p-2 xl:h-96 md:h-2/3 sm:full :w-full bg-PowderBlue xl:w-2/4 justify-center flex-col relative"
+    class="md:m-24 rounded-lg p-2 xl:h-96 md:h-2/3 sm:full sm:m-auto bg-PowderBlue xl:w-2/4 justify-center flex-col relative"
   >
     <div v-if="name" class="text-gray-900 font-semibold text-xl">
       <h1 class="absolute left-2 text-slate-600 text-md">XP: {{ xp }}</h1>
