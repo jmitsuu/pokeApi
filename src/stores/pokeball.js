@@ -7,8 +7,6 @@ const bagPokeBall = ref([])
 export const usePokemon = defineStore('usePokemon', () => {
 function incrementPokeboll(item, img){
 }
-
- 
   
   return { incrementPokeboll, }
 })

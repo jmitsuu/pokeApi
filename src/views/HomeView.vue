@@ -8,7 +8,7 @@ const pokemons = reactive(ref());
 const reloadPokemons = reactive(ref());
 const inputTextName = ref();
 const pokemonSelected = ref();
-const pokeImgSelected = ref()
+const pokeImgSelected = ref();
 const imgPokemon = ref(
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/"
 );
@@ -38,8 +38,7 @@ const pokemonFiltered = computed(() => {
 const selectPokemon = async (poke) => {
   const { data } = await axios.get(poke.url);
   pokemonSelected.value = data;
-  pokeImgSelected.value = poke.url
-  console.log(data)
+  pokeImgSelected.value = poke.url; 
 };
 </script>
 
@@ -51,25 +50,32 @@ const selectPokemon = async (poke) => {
     </h1>
     <div class="justify-center flex items-center"></div>
 
-    <div class="grid grid-cols-2 m-1 rounded-md  mt-8">
-      <ListPokeCard 
-      :name="pokemonSelected?.name"
-      :xp="pokemonSelected?.base_experience"
-      :height=" pokemonSelected?.height" 
-      :img=" pokeImgSelected ?  imgPokemon  + pokeImgSelected.split('/')[6] + '.png' : '' "
-        />
+    <div class="grid xl:grid-cols-2 md:grid-cols-1 m-1 rounded-md mt-8">
+      <ListPokeCard
+        :name="pokemonSelected?.name"
+        :xp="pokemonSelected?.base_experience"
+        :height="pokemonSelected?.height"
+        :img="
+          pokeImgSelected
+            ? imgPokemon + pokeImgSelected.split('/')[6] + '.png'
+            : ''
+        "
+        :Stats="pokemonSelected?.stats"
+      />
       <div class="border-[0.8px] border-gray-300 m-1 rounded-md p-4 mt-8">
         <span class="relative">
           <label hidden></label>
           <input
             v-model="inputTextName"
             type="text"
-            class="m-auto mb-6 border-0 h-10 rounded-md mt-9  p-2 outline-none  text-xl bg-slate-100"
+            class="m-auto mb-6 border-0 h-10 rounded-md mt-9 p-2 outline-none text-xl bg-slate-100"
             placeholder="Pesquisar..."
           />
         </span>
 
-        <div class="flex flex-wrap overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2">
+        <div
+          class="flex flex-wrap overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
+        >
           <ListPokemons
             v-for="pokemon in pokemonFiltered"
             :key="pokemon.name"
