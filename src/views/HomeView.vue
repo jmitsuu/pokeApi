@@ -83,7 +83,7 @@ function scrollToPokemon(){
         </span>
 
         <div
-          class="flex flex-wrap items-center justify-center overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
+          class="grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-1  overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
         >
           <ListPokemons
             v-for="pokemon in pokemonFiltered"
