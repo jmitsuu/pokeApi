@@ -39,7 +39,16 @@ const selectPokemon = async (poke) => {
   const { data } = await axios.get(poke.url);
   pokemonSelected.value = data;
   pokeImgSelected.value = poke.url; 
+  scrollToPokemon()
 };
+function scrollToPokemon(){
+  window.scrollTo({
+    top:0,
+    behavior: 'smooth' 
+  })
+ 
+  
+}
 </script>
 
 <template>

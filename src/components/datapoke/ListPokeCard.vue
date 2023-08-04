@@ -11,6 +11,7 @@ const pokemon = defineProps({
 });
 // const {Stats} = toRefs(pokemon)
 const { Stats } = toRefs(pokemon);
+
 </script>
 
 <template>
