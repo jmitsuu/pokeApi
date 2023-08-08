@@ -9,6 +9,7 @@ const reloadPokemons = reactive(ref());
 const inputTextName = ref();
 const pokemonSelected = ref();
 const pokeImgSelected = ref();
+const limit = ref(100);
 const imgPokemon = ref(
   "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/"
 );
@@ -21,7 +22,18 @@ onMounted(() => {
     reloadPokemons.value = data.results;
   }
   getPoke();
+
 });
+async function getMorePoke() {
+  limit.value = limit.value + 200;
+  console.log(limit.value)
+  const { data } = await axios.get(
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit.value}&offset=0`
+  );
+  const newItems = data.results;
+  reloadPokemons.value = reloadPokemons.value.concat(newItems)
+  
+}
 
 const pokemonFiltered = computed(() => {
   if (pokemons.value && inputTextName.value) {
@@ -38,17 +50,17 @@ const pokemonFiltered = computed(() => {
 const selectPokemon = async (poke) => {
   const { data } = await axios.get(poke.url);
   pokemonSelected.value = data;
-  pokeImgSelected.value = poke.url; 
-  scrollToPokemon()
+  pokeImgSelected.value = poke.url;
+  scrollToPokemon();
 };
-function scrollToPokemon(){
+function scrollToPokemon() {
   window.scrollTo({
-    top:0,
-    behavior: 'smooth' 
-  })
- 
-  
+    top: 0,
+    behavior: "smooth",
+  });
 }
+// window.addEventListener('scroll', logScroll)
+
 </script>
 
 <template>
@@ -83,16 +95,25 @@ function scrollToPokemon(){
         </span>
 
         <div
-          class="grid xl:grid-cols-4 sm:grid-cols-3 grid-cols-1  overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
+    
+          class=" grid relative xl:grid-cols-4 sm:grid-cols-3 grid-cols-1 overflow-y-scroll h-screen bg-PowderBlue bg-opacity-40 p-2"
         >
+      
+        
           <ListPokemons
+        
             v-for="pokemon in pokemonFiltered"
             :key="pokemon.name"
             :Name="pokemon.name"
             :getImage="imgPokemon + pokemon.url.split('/')[6] + '.png'"
             @click="selectPokemon(pokemon)"
+            :Pokemons="pokemon"
           />
+         
+        
+      
         </div>
+        <button class="px-8 py-3 rounded-md text-2xl uppercase w-full font-semibold text-gray-600  bg-blue-300 hover:bg-blue-500 transition-all p-2 m-2" @click="getMorePoke">Load</button>
       </div>
     </div>
   </section>
